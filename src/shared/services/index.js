@@ -1,4 +1,4 @@
-import * as Auth from './auth';
-import * as Storage from './storage';
+import * as Auth from "./auth"
+import * as Storage from "./storage"
 
-export {Auth, Storage};
+export { Auth, Storage }

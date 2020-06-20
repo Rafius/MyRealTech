@@ -1,6 +1,6 @@
 export const exists = name => {
-  const value = window.localStorage.getItem(name)
-  return !!value
+	const value = window.localStorage.getItem(name)
+	return !!value
 }
 
 export const get = name => window.localStorage.getItem(name)

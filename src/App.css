@@ -1,9 +1,9 @@
 body {
-  font-family: 'Poppins', sans-serif;
-  min-height: 100vh;
-  font-size: 1.5rem;
+	font-family: "Poppins", sans-serif;
+	min-height: 100vh;
+	font-size: 1.5rem;
 }
 
 *:focus {
-  outline: none;
+	outline: none;
 }

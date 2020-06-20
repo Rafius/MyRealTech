@@ -1,5 +1,5 @@
-import Components from './components';
-import Hooks from './hooks';
-import Services from './services';
+import Components from "./components"
+import Hooks from "./hooks"
+import Services from "./services"
 
-export {Components, Hooks, Services};
+export { Components, Hooks, Services }

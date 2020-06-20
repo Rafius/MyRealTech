@@ -1,1 +1,1 @@
-export {default} from './DashboardRouter';
+export { default } from "./DashboardRouter"

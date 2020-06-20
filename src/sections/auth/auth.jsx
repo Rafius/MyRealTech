@@ -1,8 +1,8 @@
-import React from 'react';
-import {AuthWrapper} from './auth.styled';
+import React from "react"
+import { AuthWrapper } from "./auth.styled"
 
-const Auth = ({children}) => {
-  return <AuthWrapper>{children}</AuthWrapper>;
-};
+const Auth = ({ children }) => {
+	return <AuthWrapper>{children}</AuthWrapper>
+}
 
-export default Auth;
+export default Auth
