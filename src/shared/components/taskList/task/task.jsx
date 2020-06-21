@@ -11,14 +11,16 @@ const Task = ({ tasks }) => {
 	const handleRemove = id => {
 		deleteData("tasks", "id", id)
 	}
+
 	return (
 		<TaskWrapper>
 			{tasks &&
-				tasks.map(({ id, description, taskName }) => (
+				tasks.map(({ id, description, taskName, date }) => (
 					<TaskStyle key={id}>
 						<TaskDescription>Description: {description}</TaskDescription>
 						<TaskName>TaskName: {taskName}</TaskName>
 						<TaskName>id: {id}</TaskName>
+						<TaskName>Date: {date}</TaskName>
 						<button onClick={() => handleRemove(id)}> Remove Task</button>
 					</TaskStyle>
 				))}

@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const TaskWrapper = styled.div`
 	display: flex;
-	flex-basis: 0;
+	justify-content: center;
 	flex-wrap: wrap;
 `
 
@@ -10,12 +10,17 @@ export const TaskStyle = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	flex: 1;
 	margin: 20px;
-	border: 1px solid rgba(0, 0, 0, 0.125);
-	border-radius: 5px;
+	border: 1px solid #d1d5da;
+	border-radius: 6px;
 	padding: 20px;
 	background-color: white;
+	max-width: 250px;
+	min-width: 250px;
 `
 
 export const TaskDescription = styled.div``
-export const TaskName = styled.div``
+export const TaskName = styled.div`
+	overflow-wrap: anywhere;
+`

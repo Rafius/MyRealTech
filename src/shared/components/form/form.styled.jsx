@@ -9,11 +9,15 @@ export const FormWrapper = styled.div`
 export const FieldWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	margin: 10px;
+	margin: 15px;
 `
 
-export const Label = styled.label``
+export const Label = styled.label`
+	margin-bottom: 5px;
+`
 
-export const Input = styled.input``
+export const Input = styled.input`
+	min-width: 200px;
+`
 
 export const Button = styled.button``

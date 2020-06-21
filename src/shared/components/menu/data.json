@@ -1,0 +1,17 @@
+[
+	{
+		"index": 0,
+		"name": "My Tasks",
+		"route": "/"
+	},
+	{
+		"index": 1,
+		"name": "Others Tasks",
+		"route": "/other-tasks"
+	},
+	{
+		"index": 2,
+		"name": "Create Task",
+		"route": "/create-task"
+	}
+]

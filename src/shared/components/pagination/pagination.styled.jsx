@@ -5,7 +5,6 @@ export const Wrapper = styled.div`
 	background-color: #ffffff;
 	align-items: center;
 	justify-content: flex-end;
-	margin-right: 80px;
 `
 
 export const P = styled.p`

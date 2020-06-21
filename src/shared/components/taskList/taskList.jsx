@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
 import { getData } from "../../db/utils"
 import { TaskListWrapper } from "./taskList.styled"
 import Task from "./task"
 import Pagination from "../pagination"
 
-const TaskList = () => {
+const TaskList = ({ isPrivate }) => {
 	const [tasks, setTasks] = useState([])
 	const [currentPage, setCurrentPage] = useState(1)
 	const [size, setSize] = useState(10)
 	const [currentTasks, setCurrentTasks] = useState([])
 
 	useEffect(() => {
-		const unsubscribe = getData("tasks", setTasks)
+		const unsubscribe = getData("tasks", setTasks, isPrivate)
 		return () => {
 			unsubscribe()
 		}
-	}, [])
+	}, [isPrivate])
 
 	useEffect(() => {
 		const chunkArray = () => {
@@ -24,7 +23,6 @@ const TaskList = () => {
 			for (let index = 0; index < tasks?.length; index += size) {
 				tempArray.push(tasks.slice(index, index + size))
 			}
-			console.log(tempArray[currentPage - 1])
 			setCurrentTasks(tempArray[currentPage - 1])
 		}
 		chunkArray()
@@ -44,8 +42,6 @@ const TaskList = () => {
 				setCurrentPage={setCurrentPage}
 				paginationCount={tasks?.length}
 			/>
-
-			<Link to="/create-task">Create a new Task</Link>
 		</TaskListWrapper>
 	)
 }

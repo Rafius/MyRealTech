@@ -6,18 +6,41 @@ const guidGenerator = () =>
 	Math.random().toString(36).substring(2, 15) +
 	Math.random().toString(36).substring(2, 15)
 
-export const getData = (collection, callback) =>
+const privateData = data => data.filter(item => item.author_uid !== getUserId())
+
+const getActualDate = () => new Date().getTime()
+
+const isToday = someDate => {
+	const today = new Date()
+	return (
+		someDate.getDate() === today.getDate() &&
+		someDate.getMonth() === today.getMonth() &&
+		someDate.getFullYear() === today.getFullYear()
+	)
+}
+
+const sortByDate = array =>
+	array
+		.filter(item => isToday(new Date(item.date)))
+		.sort((a, b) => a.date - b.date)
+
+export const getData = (collection, callback, isPrivate) =>
 	db.collection(collection).onSnapshot(snapshot => {
-		const data = snapshot.docs.map(doc => ({
+		let data = snapshot.docs.map(doc => ({
 			id: doc.id,
 			...doc.data()
 		}))
+		if (isPrivate) {
+			data = privateData(data)
+		}
+		data = sortByDate(data)
 		callback(data)
 	})
 
 export const insertData = (collection, data) => {
 	db.collection(collection).add({
 		...data,
+		date: getActualDate(),
 		id: guidGenerator(),
 		author_uid: getUserId()
 	})
@@ -39,7 +62,7 @@ export const userLogIn = (email, password) => {
 		.signInWithEmailAndPassword(email, password)
 		.then(authWatcher())
 		.catch(error => {
-			console.log(error)
+			console.error(error)
 		})
 }
 
@@ -50,7 +73,7 @@ export const userRegister = data => {
 		.createUserWithEmailAndPassword(email, password)
 		.then(registerUserData(data), authWatcher())
 		.catch(error => {
-			console.log(error)
+			console.error(error)
 		})
 }
 
@@ -62,7 +85,6 @@ export const registerUserData = data => {
 export const userLogout = () => {
 	firebase.auth().signOut()
 	removeToken()
-	window.location.replace = "/login"
 }
 
 export const authWatcher = () => {
@@ -71,7 +93,7 @@ export const authWatcher = () => {
 			user.getIdToken().then(idToken => {
 				setToken(idToken)
 				setUserId(firebase.auth().currentUser.uid)
-				window.location.replace = "/"
+				window.location.href = "/"
 			})
 	})
 }
