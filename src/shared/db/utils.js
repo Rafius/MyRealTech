@@ -97,11 +97,12 @@ export const userLogout = () => {
 
 export const authWatcher = () => {
 	firebase.auth().onAuthStateChanged(user => {
-		if (user)
+		if (user) {
 			user.getIdToken().then(idToken => {
 				setToken(idToken)
 				setUserId(firebase.auth().currentUser.uid)
 				window.location.href = "/"
 			})
+		}
 	})
 }

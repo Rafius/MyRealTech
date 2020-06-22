@@ -15,7 +15,6 @@ const CreateTask = () => {
 	const { title, description, date, visibility } = data
 
 	const handleSubmit = () => {
-		console.log(data)
 		const newTask = {
 			...data,
 			author_uid: getUserId(),
