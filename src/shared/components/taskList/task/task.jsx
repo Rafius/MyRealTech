@@ -1,6 +1,6 @@
 import React from "react"
 import { deleteData } from "../../../db/utils"
-import { TaskWrapper, TaskStyle, TaskDescription } from "./task.styled"
+import { TaskWrapper, TaskStyle, TaskItem } from "./task.styled"
 import { getUserId } from "../../../services/auth"
 
 const isUserData = authorUid => authorUid === getUserId()
@@ -16,9 +16,9 @@ const Task = ({ tasks }) => {
 			{tasks &&
 				tasks.map(({ id, description, title, date, author_uid: authorUid }) => (
 					<TaskStyle key={id}>
-						<TaskDescription>Title: {title}</TaskDescription>
-						<TaskDescription>Description: {description}</TaskDescription>
-						<TaskDescription>Date: {getDate(date)}</TaskDescription>
+						<TaskItem>Title: {title}</TaskItem>
+						<TaskItem>Description: {description}</TaskItem>
+						<TaskItem>Date: {getDate(date)}</TaskItem>
 						{isUserData(authorUid) && (
 							<button onClick={() => handleRemove(id)}> Remove Task</button>
 						)}

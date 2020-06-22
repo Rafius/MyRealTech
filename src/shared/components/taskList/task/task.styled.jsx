@@ -20,7 +20,6 @@ export const TaskStyle = styled.div`
 	min-width: 250px;
 `
 
-export const TaskDescription = styled.div``
-export const TaskName = styled.div`
-	overflow-wrap: anywhere;
+export const TaskItem = styled.p`
+	margin: 10px 0;
 `
