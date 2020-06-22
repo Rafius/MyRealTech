@@ -4,18 +4,18 @@ import { TaskListWrapper } from "./taskList.styled"
 import Task from "./task"
 import Pagination from "../pagination"
 
-const TaskList = ({ isPrivate }) => {
+const TaskList = ({ isPublic }) => {
 	const [tasks, setTasks] = useState([])
 	const [currentPage, setCurrentPage] = useState(1)
 	const [size, setSize] = useState(10)
 	const [currentTasks, setCurrentTasks] = useState([])
 
 	useEffect(() => {
-		const unsubscribe = getData("tasks", setTasks, isPrivate)
+		const unsubscribe = getData("tasks", setTasks, isPublic)
 		return () => {
 			unsubscribe()
 		}
-	}, [isPrivate])
+	}, [isPublic])
 
 	useEffect(() => {
 		const chunkArray = () => {

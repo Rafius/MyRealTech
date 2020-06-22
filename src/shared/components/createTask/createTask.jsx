@@ -5,8 +5,8 @@ import { insertData } from "../../db/utils"
 
 const CreateTask = () => {
 	const [data, setData] = useState({
-		title: "",
-		description: "",
+		title: "asa",
+		description: "asa",
 		date: "",
 		visibility: ""
 	})

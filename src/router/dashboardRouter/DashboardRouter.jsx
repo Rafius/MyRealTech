@@ -10,7 +10,7 @@ const DashboardRouter = () => (
 			<Route exact path="/" component={TaskList} />
 			<Route
 				path="/other-tasks"
-				render={props => <TaskList isPrivate={true} {...props} />}
+				render={props => <TaskList isPublic={true} {...props} />}
 			/>
 			<Route path="/create-task" component={CreateTask} />
 			<Redirect to="/" />

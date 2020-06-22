@@ -6,8 +6,6 @@ const guidGenerator = () =>
 	Math.random().toString(36).substring(2, 15) +
 	Math.random().toString(36).substring(2, 15)
 
-const privateData = data => data.filter(item => item.author_uid !== getUserId())
-
 const getActualDate = () => new Date().getTime()
 
 const isToday = someDate => {
@@ -19,30 +17,43 @@ const isToday = someDate => {
 	)
 }
 
+const privateData = data => data.filter(item => item.author_uid === getUserId())
+const publicData = data =>
+	data.filter(
+		item =>
+			item.author_uid !== getUserId() &&
+			item.visibility.toLowerCase() === "public"
+	)
+
+const getPrivateUserDataSorted = data => sortByDate(privateData(data))
+
+const getPublicUsersData = data => [...privateData(data), ...publicData(data)]
+
 const sortByDate = array =>
 	array
 		.filter(item => isToday(new Date(item.date)))
 		.sort((a, b) => a.date - b.date)
 
-export const getData = (collection, callback, isPrivate) =>
+export const getData = (collection, callback, isPublic) =>
 	db.collection(collection).onSnapshot(snapshot => {
 		let data = snapshot.docs.map(doc => ({
 			id: doc.id,
 			...doc.data()
 		}))
-		if (isPrivate) {
-			data = privateData(data)
+		if (isPublic) {
+			return callback(getPublicUsersData(data))
 		}
-		data = sortByDate(data)
-		callback(data)
+
+		callback(getPrivateUserDataSorted(data))
 	})
 
 export const insertData = (collection, data) => {
 	db.collection(collection).add({
 		...data,
-		date: getActualDate(),
+		date: getActualDate(data.date),
 		id: guidGenerator(),
-		author_uid: getUserId()
+		author_uid: getUserId(),
+		visibility: data.visibility || "private"
 	})
 }
 
