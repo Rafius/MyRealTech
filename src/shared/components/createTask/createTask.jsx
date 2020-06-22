@@ -1,20 +1,29 @@
 import React, { useState } from "react"
 import { FormWrapper } from "../form/form.styled"
 import { Form } from "../../components"
-import { insertData } from "../../db/utils"
+import { insertData, guidGenerator } from "../../db/utils"
+import { getUserId } from "../../services/auth"
 
 const CreateTask = () => {
 	const [data, setData] = useState({
-		title: "asa",
-		description: "asa",
+		title: "",
+		description: "",
 		date: "",
 		visibility: ""
 	})
+
 	const { title, description, date, visibility } = data
 
 	const handleSubmit = () => {
 		console.log(data)
-		insertData("tasks", { ...data })
+		const newTask = {
+			...data,
+			author_uid: getUserId(),
+			visibility: data.visibility || "private",
+			id: guidGenerator(),
+			date: new Date().getTime()
+		}
+		insertData("tasks", { ...newTask })
 	}
 
 	const handleChange = (modelName, value) => {
@@ -52,6 +61,7 @@ const CreateTask = () => {
 			modelName: "visibility",
 			type: "text",
 			value: visibility,
+			description: "Private by default",
 			onChange: handleChange
 		}
 	]

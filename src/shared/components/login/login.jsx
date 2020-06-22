@@ -6,8 +6,8 @@ import { Form } from "../../components"
 
 const Login = () => {
 	const [data, setData] = useState({
-		email: "rafius93@gmail.com",
-		password: "test12"
+		email: "",
+		password: ""
 	})
 
 	const { email, password } = data

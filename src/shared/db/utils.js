@@ -1,12 +1,10 @@
 import firebase from "../../firebase"
-import { setToken, removeToken, setUserId, getUserId } from "../services/auth"
+import { setToken, setUserId, getUserId } from "../services/auth"
 
 const db = firebase.firestore()
-const guidGenerator = () =>
+export const guidGenerator = () =>
 	Math.random().toString(36).substring(2, 15) +
 	Math.random().toString(36).substring(2, 15)
-
-const getActualDate = () => new Date().getTime()
 
 const isToday = someDate => {
 	const today = new Date()
@@ -47,14 +45,13 @@ export const getData = (collection, callback, isPublic) =>
 		callback(getPrivateUserDataSorted(data))
 	})
 
+const updateUserDataCount = () => {}
+
 export const insertData = (collection, data) => {
 	db.collection(collection).add({
-		...data,
-		date: getActualDate(data.date),
-		id: guidGenerator(),
-		author_uid: getUserId(),
-		visibility: data.visibility || "private"
+		...data
 	})
+	updateUserDataCount()
 }
 
 export const deleteData = async (collection, condition, id) => {
@@ -95,7 +92,7 @@ export const registerUserData = data => {
 
 export const userLogout = () => {
 	firebase.auth().signOut()
-	removeToken()
+	localStorage.clear()
 }
 
 export const authWatcher = () => {

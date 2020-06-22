@@ -6,11 +6,11 @@ import { Form } from "../../components"
 
 const Register = () => {
 	const [data, setData] = useState({
-		email: "afsaf@a.com",
-		password: "1243124124",
-		username: "124124",
-		name: "12412",
-		age: "12412"
+		email: "",
+		password: "",
+		username: "",
+		name: "",
+		age: ""
 	})
 
 	const { email, password, username, name, age } = data

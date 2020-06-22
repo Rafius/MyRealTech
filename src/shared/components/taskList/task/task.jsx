@@ -1,36 +1,29 @@
 import React from "react"
 import { deleteData } from "../../../db/utils"
-import {
-	TaskWrapper,
-	TaskStyle,
-	TaskDescription,
-	TaskName
-} from "./task.styled"
+import { TaskWrapper, TaskStyle, TaskDescription } from "./task.styled"
 import { getUserId } from "../../../services/auth"
+
+const isUserData = authorUid => authorUid === getUserId()
+const getDate = date => new Date(date).toISOString().slice(11, -5)
 
 const Task = ({ tasks }) => {
 	const handleRemove = id => {
 		deleteData("tasks", "id", id)
 	}
 
-	const isUserData = authorUid => authorUid === getUserId()
-
 	return (
 		<TaskWrapper>
 			{tasks &&
-				tasks.map(
-					({ id, description, taskName, date, author_uid: authorUid }) => (
-						<TaskStyle key={id}>
-							<TaskDescription>Description: {description}</TaskDescription>
-							<TaskName>TaskName: {taskName}</TaskName>
-							<TaskName>id: {id}</TaskName>
-							<TaskName>Date: {date}</TaskName>
-							{isUserData(authorUid) && (
-								<button onClick={() => handleRemove(id)}> Remove Task</button>
-							)}
-						</TaskStyle>
-					)
-				)}
+				tasks.map(({ id, description, title, date, author_uid: authorUid }) => (
+					<TaskStyle key={id}>
+						<TaskDescription>Title: {title}</TaskDescription>
+						<TaskDescription>Description: {description}</TaskDescription>
+						<TaskDescription>Date: {getDate(date)}</TaskDescription>
+						{isUserData(authorUid) && (
+							<button onClick={() => handleRemove(id)}> Remove Task</button>
+						)}
+					</TaskStyle>
+				))}
 		</TaskWrapper>
 	)
 }

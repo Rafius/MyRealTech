@@ -11,6 +11,10 @@ export const FieldWrapper = styled.div`
 	flex-direction: column;
 	margin: 15px;
 `
+export const Description = styled.p`
+	margin: 0;
+	font-size: 12px;
+`
 
 export const Label = styled.label`
 	margin-bottom: 5px;

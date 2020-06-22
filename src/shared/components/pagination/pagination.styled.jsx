@@ -2,9 +2,9 @@ import styled from "styled-components"
 
 export const Wrapper = styled.div`
 	display: flex;
-	background-color: #ffffff;
 	align-items: center;
 	justify-content: flex-end;
+	margin: 20px;
 `
 
 export const P = styled.p`

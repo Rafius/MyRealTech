@@ -1,8 +1,6 @@
 import React from "react"
 import { AuthWrapper } from "./auth.styled"
 
-const Auth = ({ children }) => {
-	return <AuthWrapper>{children}</AuthWrapper>
-}
+const Auth = ({ children }) => <AuthWrapper>{children}</AuthWrapper>
 
 export default Auth
