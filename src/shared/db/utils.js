@@ -17,15 +17,11 @@ const isToday = someDate => {
 
 const privateData = data => data.filter(item => item.author_uid === getUserId())
 const publicData = data =>
-	data.filter(
-		item =>
-			item.author_uid !== getUserId() &&
-			item.visibility.toLowerCase() === "public"
-	)
+	data.filter(item => item.visibility.toLowerCase() === "public")
 
 const getPrivateUserDataSorted = data => sortByDate(privateData(data))
 
-const getPublicUsersData = data => [...privateData(data), ...publicData(data)]
+const getPublicUsersData = data => sortByDate(publicData(data))
 
 const sortByDate = array =>
 	array
